@@ -16,9 +16,7 @@ function 読み込む() {
 }
 
 
-let weeks = [
-  { 週のID: 1, 開始日: "2026/8/10", 終了日: "2026/8/16", 今週の目標: "", 振り返り: "" },
-];
+let weeks = [];
 
 let 現在の週ID = 1;
 
@@ -43,6 +41,7 @@ function 現在の週を取得する() {
 let tasks = [];
 
 読み込む()
+画面の状態を確認する()
 
 function 最新の週を取得する() {
   let 最新の週 = weeks[0];
@@ -76,7 +75,6 @@ function 日付を文字列にする(dateObj) {
   let day = dateObj.getDate();
   return year + "/" + month + "/" + day;
 }
-weeks.splice(2, 1);
 
 let addWeekButton = document.getElementById("add-week-button");
 
@@ -130,6 +128,9 @@ function 反省入力欄にイベントをつける() {
 }
 
 function 週を表示する(){
+  if(weeks.length === 0){
+    return;
+  }
   let weekSection = document.getElementById("week-section");
   let 現在の週 = 現在の週を取得する();
   weekSection.innerHTML = "今週の目標 : " + 現在の週.今週の目標;
@@ -172,6 +173,9 @@ saveReflectionButton.addEventListener("click", function() {
 });
 
 function 画面を更新する(){
+  if(weeks.length === 0){
+    return;
+  }
     let taskSection = document.getElementById("task-section");
     let html = "";
 
@@ -200,7 +204,7 @@ function 画面を更新する(){
     let 現在の週 = 現在の週を取得する();
     let Html = 現在の週.振り返り; 
 
-    weekReflection.innerHTML = Html;
+    weekReflection.value = Html;
 }
 
 function チェックボックスにイベントをつける() {
@@ -231,6 +235,7 @@ function チェックボックスにイベントをつける() {
 週選択肢を表示する();
 週選択にイベントをつける();
 
+
 let addTaskButton = document.getElementById("add-task-button");
 
 addTaskButton.addEventListener("click", function() {
@@ -254,4 +259,50 @@ addTaskButton.addEventListener("click", function() {
   保存する();
   チェックボックスにイベントをつける();
   反省入力欄にイベントをつける();
+});
+
+function 画面の状態を確認する(){
+  let a = document.getElementById("main") ;
+  let b = document.getElementById("first");
+  if(weeks.length === 0){
+    a.style.display = "none";
+    b.style.display = "block";
+  }else{
+    a.style.display = "block";
+    b.style.display = "none";
+  }
+}
+
+let createFirstWeekButton = document.getElementById("create-first-week-button");
+
+createFirstWeekButton.addEventListener("click", function() {
+  let startInput = document.getElementById("first-week-start");
+  let goalInput = document.getElementById("first-week-goal");
+
+  if (startInput.value != "" && goalInput.value != "") {
+    let 開始日 = new Date(startInput.value);
+    let 終了日 = new Date(開始日);
+    終了日.setDate(開始日.getDate() + 6);
+
+    let firstWeek = {
+      週のID: 1,
+      開始日: startInput.value,
+      終了日: 日付を文字列にする(終了日),
+      今週の目標: goalInput.value,
+      振り返り: ""
+    };
+
+    weeks.push(firstWeek);
+    現在の週ID = firstWeek.週のID;
+
+    保存する();
+    週を表示する();
+    画面を更新する();
+    週選択肢を表示する();
+    チェックボックスにイベントをつける();
+    反省入力欄にイベントをつける();
+    画面の状態を確認する();
+  } else {
+    alert("開始日と目標の両方を入力してください(´・ω・`)");
+  }
 });
