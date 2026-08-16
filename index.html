@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勉強計画アプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>週単位の勉強計画</h1>
+
+  <div class="week-controls">
+    <select id="week-selector"></select>
+    <div class="add-week-form">
+      <input type="text" id="new-week-goal" placeholder="今週の目標">
+      <button id="add-week-button">週を追加</button>
+    </div>
+  </div>
+
+  <h2 id="week-section"></h2>
+
+  <div class="reflection-form">
+    <textarea id="week-reflection-input" placeholder="今週の振り返りを書く"></textarea>
+    <button id="save-reflection-button">振り返りを保存</button>
+  </div>
+
+  <div class="add-task-form">
+    <input type="text" id="new-task-input" placeholder="タスクの追加">
+    <button id="add-task-button">追加</button>
+  </div>
+
+  <div id="task-section"></div>
+
+  <script src="script.js"></script>
+</body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</html>
