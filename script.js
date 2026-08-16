@@ -102,6 +102,7 @@ addWeekButton.addEventListener("click", function() {
     画面を更新する();
     週選択肢を表示する();
     チェックボックスにイベントをつける();
+    タスク削除ボタンにイベントをつける();
     反省入力欄にイベントをつける();
   } else {
     alert("目標を入力してください");
@@ -156,6 +157,7 @@ function 週選択にイベントをつける() {
     週を表示する();
     画面を更新する();
     チェックボックスにイベントをつける();
+    タスク削除ボタンにイベントをつける();
     反省入力欄にイベントをつける();
   });
 }
@@ -191,10 +193,9 @@ function 画面を更新する(){
         }
 
         html = html + "<div class='task-card " + completedClass + "'>";
-        html = html + "<label class='task-label'>";
+        html = html + "<button type='button' class='delete-button' data-id='" + tasks[i].タスクのID + "'>&times;</button>";
         html = html + "<input type='checkbox' data-id='" + tasks[i].タスクのID + "' " + checkedText + ">";
         html = html + "<span>" + tasks[i].タスクの内容 + "</span>";
-        html = html + "</label>";
         html = html + "<input type='text' class='reflection-input' data-id='" + tasks[i].タスクのID + "' value='" + tasks[i].このタスクの反省 + "' placeholder='反省を書く'><br>";
         html = html + "</div>";
     }
@@ -222,6 +223,28 @@ function チェックボックスにイベントをつける() {
       画面を更新する();
       保存する();
       チェックボックスにイベントをつける();
+      タスク削除ボタンにイベントをつける();
+      反省入力欄にイベントをつける();
+    });
+  }
+}
+
+function タスク削除ボタンにイベントをつける() {
+  let deletebutton = document.querySelectorAll(".delete-button");
+
+  for (let i = 0; i < deletebutton.length; i++) {
+    deletebutton[i].addEventListener("click", function() {
+      let clickedId = this.dataset.id;
+
+      for(let j = 0; j < tasks.length; j++){
+        if(tasks[j].タスクのID == clickedId){
+            tasks.splice(j,1)
+            break;
+        }
+      }
+      画面を更新する();
+      保存する();
+      タスク削除ボタンにイベントをつける();
       反省入力欄にイベントをつける();
     });
   }
@@ -231,6 +254,7 @@ function チェックボックスにイベントをつける() {
 画面を更新する();
 保存する();
 チェックボックスにイベントをつける();
+タスク削除ボタンにイベントをつける();
 反省入力欄にイベントをつける();
 週選択肢を表示する();
 週選択にイベントをつける();
@@ -241,9 +265,15 @@ let addTaskButton = document.getElementById("add-task-button");
 addTaskButton.addEventListener("click", function() {
   let inputElement = document.getElementById("new-task-input");
   let inputValue = inputElement.value;  // 入力された文字を取得
+  let newId = 0;
+  for(let i = 0 ; i < tasks.length; i++){
+    if(tasks[i].タスクのID > newId){
+      newId = tasks[i].タスクのID
+    }
+  }
 
   let newTask = {
-    タスクのID: tasks.length + 1,
+    タスクのID: newId + 1,
     週のID: 現在の週ID,
     実施日: "",
     タスクの内容: inputValue,
