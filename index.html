@@ -11,9 +11,16 @@
     <h1>週単位の勉強計画</h1>
 
     <div class="week-controls">
-      <select id="week-selector"></select>
-      <div class="add-week-form">
+      <div class="week-selectors">
+        <h5>対象週</h5>
+        <select id="week-selector"></select>
+      </div>
+      <div class="new-week-goals">
+        <h5>来週の目標記入</h5>
         <input type="text" id="new-week-goal" placeholder="来週の目標">
+      </div>
+      <div class="new-button">
+        <h5>&nbsp;</h5>
         <button id="add-week-button">週を追加</button>
       </div>
     </div>
@@ -38,9 +45,9 @@
     <input type="text" id="first-week-goal" placeholder="今週の目標">
     <button id="create-first-week-button">開始する</button>
     <h2>注意</h2>
-    <p>開始日は必ずその週の月曜日を半角で/区切りにして入力してください</p>
+    <p>開始日は必ず設定する週の月曜日を半角で年/月/日で入力してください</p>
     <p>月日が一桁の時は2桁目に0を書かないでください。(良い例:2026/1/1)(悪い例:2026/01/01)</p>
-    <p>目標は後から変更できません(変更機能作るのめんどうだった)</p>
+    <p>今はまだ目標を後から変更できないです</p>
   </div>
   <script src="script.js"></script>
 </body>
