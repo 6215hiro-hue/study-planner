@@ -47,6 +47,8 @@ h1 {
 }
 
 .week-controls select{
+  background-color:rgb(40, 40, 40);
+  color:rgb(255, 255, 255);
   flex: 1;
   padding: 8px 5px;
   box-sizing: border-box;
@@ -56,6 +58,7 @@ h1 {
 }
 
 .week-controls input{
+  background-color:rgb(40, 40, 40);
   flex: 1;
   width: 250px;
   padding: 4px;
@@ -92,6 +95,8 @@ h1 {
 }
 
 .reflection-form textarea {
+  background-color:rgb(40, 40, 40);
+  color: rgb(255,255,255);
   flex: 1;
   min-width: 200px;
   min-height: 60px;
@@ -104,6 +109,8 @@ h1 {
 }
 
 .add-task-form input {
+  background-color:rgb(40, 40, 40);
+  color: rgb(255,255,255);
   flex: 1;
 }
 
@@ -122,6 +129,8 @@ button:hover {
 }
 
 input[type="text"], textarea, select {
+  background-color:rgb(40, 40, 40);
+  color: rgb(255,255,255);
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
